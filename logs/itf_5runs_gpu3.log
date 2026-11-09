@@ -1,0 +1,20 @@
+[GPU3] 23:02 START seed42_imagenet_mobilenet_v3_large cs=64
+[GPU3] 00:32 END seed42_imagenet_mobilenet_v3_large (exit 0)
+[GPU3] 00:32 START seed43_imagenet_mobilenet_v3_large cs=64
+[GPU3] 02:01 END seed43_imagenet_mobilenet_v3_large (exit 0)
+[GPU3] 02:01 START seed44_imagenet_mobilenet_v3_large cs=64
+[GPU3] 03:26 END seed44_imagenet_mobilenet_v3_large (exit 0)
+[GPU3] 03:26 START seed45_imagenet_mobilenet_v3_large cs=64
+[GPU3] 04:52 END seed45_imagenet_mobilenet_v3_large (exit 0)
+[GPU3] 04:52 START seed46_imagenet_mobilenet_v3_large cs=64
+[GPU3] 06:18 END seed46_imagenet_mobilenet_v3_large (exit 0)
+[GPU3] 06:18 START seed42_cub_mobilenet_v3_large cs=32
+[GPU3] 07:45 END seed42_cub_mobilenet_v3_large (exit 0)
+[GPU3] 07:45 START seed43_cub_mobilenet_v3_large cs=32
+[GPU3] 09:04 END seed43_cub_mobilenet_v3_large (exit 0)
+[GPU3] 09:04 START seed44_cub_mobilenet_v3_large cs=32
+[GPU3] 10:16 END seed44_cub_mobilenet_v3_large (exit 0)
+[GPU3] 10:16 START seed45_cub_mobilenet_v3_large cs=32
+[GPU3] 11:28 END seed45_cub_mobilenet_v3_large (exit 0)
+[GPU3] 11:28 START seed46_cub_mobilenet_v3_large cs=32
+[GPU3] 12:28 END seed46_cub_mobilenet_v3_large (exit 0)

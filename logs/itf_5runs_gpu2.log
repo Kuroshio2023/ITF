@@ -1,0 +1,20 @@
+[GPU2] 23:02 START seed42_imagenet_densenet121 cs=64
+[GPU2] 00:43 END seed42_imagenet_densenet121 (exit 0)
+[GPU2] 00:43 START seed43_imagenet_densenet121 cs=64
+[GPU2] 02:26 END seed43_imagenet_densenet121 (exit 0)
+[GPU2] 02:26 START seed44_imagenet_densenet121 cs=64
+[GPU2] 04:10 END seed44_imagenet_densenet121 (exit 0)
+[GPU2] 04:10 START seed45_imagenet_densenet121 cs=64
+[GPU2] 05:46 END seed45_imagenet_densenet121 (exit 0)
+[GPU2] 05:46 START seed46_imagenet_densenet121 cs=64
+[GPU2] 07:22 END seed46_imagenet_densenet121 (exit 0)
+[GPU2] 07:22 START seed42_cub_densenet121 cs=32
+[GPU2] 09:01 END seed42_cub_densenet121 (exit 0)
+[GPU2] 09:01 START seed43_cub_densenet121 cs=32
+[GPU2] 10:31 END seed43_cub_densenet121 (exit 0)
+[GPU2] 10:31 START seed44_cub_densenet121 cs=32
+[GPU2] 11:53 END seed44_cub_densenet121 (exit 0)
+[GPU2] 11:53 START seed45_cub_densenet121 cs=32
+[GPU2] 13:06 END seed45_cub_densenet121 (exit 0)
+[GPU2] 13:06 START seed46_cub_densenet121 cs=32
+[GPU2] 14:17 END seed46_cub_densenet121 (exit 0)

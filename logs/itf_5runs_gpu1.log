@@ -1,0 +1,20 @@
+[GPU1] 23:02 START seed42_imagenet_resnet101 cs=64
+[GPU1] 00:41 END seed42_imagenet_resnet101 (exit 0)
+[GPU1] 00:41 START seed43_imagenet_resnet101 cs=64
+[GPU1] 02:19 END seed43_imagenet_resnet101 (exit 0)
+[GPU1] 02:19 START seed44_imagenet_resnet101 cs=64
+[GPU1] 03:57 END seed44_imagenet_resnet101 (exit 0)
+[GPU1] 03:57 START seed45_imagenet_resnet101 cs=64
+[GPU1] 05:36 END seed45_imagenet_resnet101 (exit 0)
+[GPU1] 05:36 START seed46_imagenet_resnet101 cs=64
+[GPU1] 07:15 END seed46_imagenet_resnet101 (exit 0)
+[GPU1] 07:15 START seed42_cub_resnet101 cs=32
+[GPU1] 08:54 END seed42_cub_resnet101 (exit 0)
+[GPU1] 08:54 START seed43_cub_resnet101 cs=32
+[GPU1] 10:22 END seed43_cub_resnet101 (exit 0)
+[GPU1] 10:22 START seed44_cub_resnet101 cs=32
+[GPU1] 11:42 END seed44_cub_resnet101 (exit 0)
+[GPU1] 11:42 START seed45_cub_resnet101 cs=32
+[GPU1] 12:54 END seed45_cub_resnet101 (exit 0)
+[GPU1] 12:54 START seed46_cub_resnet101 cs=32
+[GPU1] 14:01 END seed46_cub_resnet101 (exit 0)

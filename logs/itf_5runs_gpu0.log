@@ -1,0 +1,20 @@
+[GPU0] 23:02 START seed42_imagenet_vgg16 cs=64
+[GPU0] 00:33 END seed42_imagenet_vgg16 (exit 0)
+[GPU0] 00:33 START seed43_imagenet_vgg16 cs=64
+[GPU0] 02:00 END seed43_imagenet_vgg16 (exit 0)
+[GPU0] 02:00 START seed44_imagenet_vgg16 cs=64
+[GPU0] 03:27 END seed44_imagenet_vgg16 (exit 0)
+[GPU0] 03:27 START seed45_imagenet_vgg16 cs=64
+[GPU0] 04:56 END seed45_imagenet_vgg16 (exit 0)
+[GPU0] 04:56 START seed46_imagenet_vgg16 cs=64
+[GPU0] 06:22 END seed46_imagenet_vgg16 (exit 0)
+[GPU0] 06:22 START seed42_cub_vgg16 cs=32
+[GPU0] 07:48 END seed42_cub_vgg16 (exit 0)
+[GPU0] 07:48 START seed43_cub_vgg16 cs=32
+[GPU0] 09:06 END seed43_cub_vgg16 (exit 0)
+[GPU0] 09:06 START seed44_cub_vgg16 cs=32
+[GPU0] 10:16 END seed44_cub_vgg16 (exit 0)
+[GPU0] 10:16 START seed45_cub_vgg16 cs=32
+[GPU0] 11:18 END seed45_cub_vgg16 (exit 0)
+[GPU0] 11:18 START seed46_cub_vgg16 cs=32
+[GPU0] 12:18 END seed46_cub_vgg16 (exit 0)
