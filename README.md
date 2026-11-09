@@ -121,42 +121,42 @@ H-Sets reference values are the paper-reported figures.
 
 ### ROAD_AOPC (higher is better)
 
-| Dataset | Model | ITF | H-Sets (paper) | Δ |
+| Dataset | Model | ITF | Sparse_ITF | H-Sets (paper) | 
 |---|---|---|---|---|
-| CUB | VGG16 | **0.748 ± 0.002** | 0.65 | **+0.098** |
-| CUB | ResNet101 | **0.766 ± 0.001** | 0.63 | **+0.136** |
-| CUB | DenseNet121 | **0.766 ± 0.003** | 0.65 | **+0.116** |
-| CUB | MobileNetV3 | **0.758 ± 0.002** | 0.60 | **+0.158** |
-| ImageNet | VGG16 | **0.656 ± 0.004** | 0.34 | **+0.316** |
-| ImageNet | ResNet101 | **0.611 ± 0.009** | 0.26 | **+0.351** |
-| ImageNet | DenseNet121 | **0.623 ± 0.004** | 0.38 | **+0.243** |
-| ImageNet | MobileNetV3 | **0.578 ± 0.008** | 0.37 | **+0.208** |
+| CUB | VGG16 | **0.748 ± 0.002** | +0.7165 ± 0.1942 | 0.65 | 
+| CUB | ResNet101 | **0.766 ± 0.001** |+0.6647 ± 0.2217 | 0.63 | 
+| CUB | DenseNet121 | **0.766 ± 0.003** |+0.6763 ± 0.2113| 0.65 | 
+| CUB | MobileNetV3 | **0.758 ± 0.002** |+0.6525 ± 0.2326| 0.60 | 
+| ImageNet | VGG16 | **0.656 ± 0.004** | +0.5672 ± 0.2323| 0.34 | 
+| ImageNet | ResNet101 | **0.611 ± 0.009** | +0.5067 ± 0.2451| 0.26 | 
+| ImageNet | DenseNet121 | **0.623 ± 0.004** |+0.5188 ± 0.2389| 0.38 | 
+| ImageNet | MobileNetV3 | **0.578 ± 0.008** |+0.5012 ± 0.2382| 0.37 | 
 
 ### Gini (sparsity; higher = sparser)
 
-| Dataset | Model | ITF | H-Sets (paper) |
-|---|---|---|---|
-| CUB | VGG16 | 0.901 ± 0.002 | 0.93 |
-| CUB | ResNet101 | 0.788 ± 0.003 | 0.89 |
-| CUB | DenseNet121 | 0.778 ± 0.003 | 0.89 |
-| CUB | MobileNetV3 | 0.774 ± 0.003 | 0.89 |
-| ImageNet | VGG16 | 0.752 ± 0.003 | 0.95 |
-| ImageNet | ResNet101 | 0.771 ± 0.002 | 0.98 |
-| ImageNet | DenseNet121 | 0.755 ± 0.001 | 0.94 |
-| ImageNet | MobileNetV3 | 0.762 ± 0.002 | 0.95 |
+| Dataset | Model | ITF |Sparse_ITF | H-Sets (paper) |
+|---|---|---|---|---|
+| CUB | VGG16 | 0.901 ± 0.002 |+0.9499 ± 0.0317| 0.93 |
+| CUB | ResNet101 | 0.788 ± 0.003 | +0.9390 ± 0.0357| 0.89 |
+| CUB | DenseNet121 | 0.778 ± 0.003 |+0.9384 ± 0.0343| 0.89 |
+| CUB | MobileNetV3 | 0.774 ± 0.003 |+0.9346 ± 0.0386| 0.89 |
+| ImageNet | VGG16 | 0.752 ± 0.003 | +0.9064 ± 0.0540| 0.95 |
+| ImageNet | ResNet101 | 0.771 ± 0.002 |+0.9134 ± 0.0478| 0.98 |
+| ImageNet | DenseNet121 | 0.755 ± 0.001 | +0.9081 ± 0.0493| 0.94 |
+| ImageNet | MobileNetV3 | 0.762 ± 0.002 |+0.8993 ± 0.0519| 0.95 |
 
 ### Faithfulness Correlation (higher = more faithful)
 
-| Dataset | Model | ITF | H-Sets (paper) |
-|---|---|---|---|
-| CUB | VGG16 | 0.070 ± 0.005 | 0.124 |
-| CUB | ResNet101 | 0.052 ± 0.003 | 0.123 |
-| CUB | DenseNet121 | **0.071 ± 0.010** | 0.029 |
-| CUB | MobileNetV3 | 0.054 ± 0.003 | 0.128 |
-| ImageNet | VGG16 | **0.026 ± 0.007** | 0.009 |
-| ImageNet | ResNet101 | 0.016 ± 0.007 | 0.251 |
-| ImageNet | DenseNet121 | 0.021 ± 0.006 | 0.034 |
-| ImageNet | MobileNetV3 | 0.017 ± 0.004 | 0.021 |
+| Dataset | Model | ITF | Sparse_ITF | H-Sets (paper) |
+|---|---|---|---|---|
+| CUB | VGG16 | 0.070 ± 0.005 |+0.0877 ± 0.2017| 0.124 |
+| CUB | ResNet101 | 0.052 ± 0.003 |+0.0379 ± 0.2015| 0.123 |
+| CUB | DenseNet121 | **0.071 ± 0.010** |+0.0631 ± 0.1899| 0.029 |
+| CUB | MobileNetV3 | 0.054 ± 0.003 |+0.0366 ± 0.2031| 0.128 |
+| ImageNet | VGG16 | **0.026 ± 0.007** |+0.0281 ± 0.1963| 0.009 |
+| ImageNet | ResNet101 | 0.016 ± 0.007 | +0.0066 ± 0.1899| 0.251 |
+| ImageNet | DenseNet121 | 0.021 ± 0.006 |+0.0227 ± 0.1818| 0.034 |
+| ImageNet | MobileNetV3 | 0.017 ± 0.004 |+0.0158 ± 0.1914| 0.021 |
 
 **Interpretation.**
 
