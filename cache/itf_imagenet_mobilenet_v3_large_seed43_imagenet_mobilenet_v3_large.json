@@ -1,0 +1,26 @@
+{
+  "dataset": "imagenet",
+  "model": "mobilenet_v3_large",
+  "n": 1000,
+  "sampler": "zero",
+  "hierarchy": "two-level",
+  "fp16": false,
+  "signed": false,
+  "coarse_size": 64,
+  "seed": 43,
+  "block_size": 8,
+  "top_B": 5,
+  "tag": "seed43_imagenet_mobilenet_v3_large",
+  "gini": {
+    "mean": 0.7637150145457409,
+    "std": 0.05701110720675947
+  },
+  "road": {
+    "mean": 0.575,
+    "std": 0.2195639618273758
+  },
+  "corr": {
+    "mean": 0.014794329978293792,
+    "std": 0.18927981998871643
+  }
+}

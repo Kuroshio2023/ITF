@@ -1,0 +1,26 @@
+{
+  "dataset": "cub",
+  "model": "resnet101",
+  "n": 1000,
+  "sampler": "zero",
+  "hierarchy": "two-level",
+  "fp16": false,
+  "signed": false,
+  "coarse_size": 32,
+  "seed": 42,
+  "block_size": 8,
+  "top_B": 5,
+  "tag": "seed42_cub_resnet101",
+  "gini": {
+    "mean": 0.7916129824607498,
+    "std": 0.08314276101669935
+  },
+  "road": {
+    "mean": 0.767,
+    "std": 0.133082681067072
+  },
+  "corr": {
+    "mean": 0.05331286593573661,
+    "std": 0.19531347622249554
+  }
+}

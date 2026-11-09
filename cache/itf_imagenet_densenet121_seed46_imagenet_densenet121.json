@@ -1,0 +1,26 @@
+{
+  "dataset": "imagenet",
+  "model": "densenet121",
+  "n": 999,
+  "sampler": "zero",
+  "hierarchy": "two-level",
+  "fp16": false,
+  "signed": false,
+  "coarse_size": 64,
+  "seed": 46,
+  "block_size": 8,
+  "top_B": 5,
+  "tag": "seed46_imagenet_densenet121",
+  "gini": {
+    "mean": 0.7543872345944066,
+    "std": 0.07583205136001822
+  },
+  "road": {
+    "mean": 0.6251251251251251,
+    "std": 0.2008585272069761
+  },
+  "corr": {
+    "mean": 0.021590691438638614,
+    "std": 0.1897466855762476
+  }
+}

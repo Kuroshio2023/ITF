@@ -1,0 +1,26 @@
+{
+  "dataset": "cub",
+  "model": "vgg16",
+  "n": 977,
+  "sampler": "zero",
+  "hierarchy": "two-level",
+  "fp16": false,
+  "signed": false,
+  "coarse_size": 32,
+  "seed": 45,
+  "block_size": 8,
+  "top_B": 5,
+  "tag": "seed45_cub_vgg16",
+  "gini": {
+    "mean": 0.9043874654862804,
+    "std": 0.1009892279053492
+  },
+  "road": {
+    "mean": 0.7466734902763563,
+    "std": 0.16554216334843588
+  },
+  "corr": {
+    "mean": 0.07544472723164826,
+    "std": 0.197498338491398
+  }
+}

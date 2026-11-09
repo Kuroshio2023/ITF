@@ -1,0 +1,26 @@
+{
+  "dataset": "imagenet",
+  "model": "vgg16",
+  "n": 998,
+  "sampler": "zero",
+  "hierarchy": "two-level",
+  "fp16": false,
+  "signed": false,
+  "coarse_size": 64,
+  "seed": 43,
+  "block_size": 8,
+  "top_B": 5,
+  "tag": "seed43_imagenet_vgg16",
+  "gini": {
+    "mean": 0.754124405296881,
+    "std": 0.09583294019744996
+  },
+  "road": {
+    "mean": 0.6511356045424181,
+    "std": 0.20133251736024121
+  },
+  "corr": {
+    "mean": 0.036203159077811714,
+    "std": 0.1885318090943727
+  }
+}

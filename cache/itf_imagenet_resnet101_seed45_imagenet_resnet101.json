@@ -1,0 +1,26 @@
+{
+  "dataset": "imagenet",
+  "model": "resnet101",
+  "n": 999,
+  "sampler": "zero",
+  "hierarchy": "two-level",
+  "fp16": false,
+  "signed": false,
+  "coarse_size": 64,
+  "seed": 45,
+  "block_size": 8,
+  "top_B": 5,
+  "tag": "seed45_imagenet_resnet101",
+  "gini": {
+    "mean": 0.7707338886168251,
+    "std": 0.08276115083302168
+  },
+  "road": {
+    "mean": 0.6102769436102771,
+    "std": 0.21520719671156666
+  },
+  "corr": {
+    "mean": 0.023455173693232977,
+    "std": 0.18970730638372485
+  }
+}

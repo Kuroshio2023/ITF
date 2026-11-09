@@ -1,0 +1,26 @@
+{
+  "dataset": "cub",
+  "model": "densenet121",
+  "n": 1000,
+  "sampler": "zero",
+  "hierarchy": "two-level",
+  "fp16": false,
+  "signed": false,
+  "coarse_size": 32,
+  "seed": 43,
+  "block_size": 8,
+  "top_B": 5,
+  "tag": "seed43_cub_densenet121",
+  "gini": {
+    "mean": 0.7766254333419262,
+    "std": 0.08505731719338663
+  },
+  "road": {
+    "mean": 0.7655,
+    "std": 0.13656001936470608
+  },
+  "corr": {
+    "mean": 0.08405429809561386,
+    "std": 0.20388113982669295
+  }
+}

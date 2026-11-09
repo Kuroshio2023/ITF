@@ -1,0 +1,26 @@
+{
+  "dataset": "cub",
+  "model": "mobilenet_v3_large",
+  "n": 1000,
+  "sampler": "zero",
+  "hierarchy": "two-level",
+  "fp16": false,
+  "signed": false,
+  "coarse_size": 32,
+  "seed": 42,
+  "block_size": 8,
+  "top_B": 5,
+  "tag": "seed42_cub_mobilenet_v3_large",
+  "gini": {
+    "mean": 0.7744827645952563,
+    "std": 0.0777777779990059
+  },
+  "road": {
+    "mean": 0.7581666666666668,
+    "std": 0.13576931006510848
+  },
+  "corr": {
+    "mean": 0.053878990203020845,
+    "std": 0.1940843486053617
+  }
+}
