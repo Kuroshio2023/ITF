@@ -153,7 +153,7 @@ H-Sets reference values are the paper-reported figures.
 | CUB | ResNet101 | 0.052 ± 0.003 |+0.0379 ± 0.2015| 0.123 |
 | CUB | DenseNet121 | **0.071 ± 0.010** |+0.0631 ± 0.1899| 0.029 |
 | CUB | MobileNetV3 | 0.054 ± 0.003 |+0.0366 ± 0.2031| 0.128 |
-| ImageNet | VGG16 | **0.026 ± 0.007** |+0.0281 ± 0.1963| 0.009 |
+| ImageNet | VGG16 | 0.026 ± 0.007 |**+0.0281 ± 0.1963**| 0.009 |
 | ImageNet | ResNet101 | 0.016 ± 0.007 | +0.0066 ± 0.1899| 0.251 |
 | ImageNet | DenseNet121 | 0.021 ± 0.006 |+0.0227 ± 0.1818| 0.034 |
 | ImageNet | MobileNetV3 | 0.017 ± 0.004 |+0.0158 ± 0.1914| 0.021 |
