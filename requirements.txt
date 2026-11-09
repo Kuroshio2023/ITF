@@ -1,0 +1,37 @@
+# =============================================================================
+# ITF — Python dependencies
+# =============================================================================
+#
+# IMPORTANT: Install PyTorch FIRST via conda to match your system CUDA:
+#
+#   conda install pytorch torchvision torchaudio pytorch-cuda=11.8 \
+#                 -c pytorch -c nvidia
+#
+# Tested with torch >= 2.0, torchvision >= 0.15.
+# Do NOT pip-install torch from this file — CUDA binary compatibility
+# requires the conda channel. All other deps install cleanly via pip.
+#
+# After torch:
+#   pip install -r requirements.txt
+#
+# =============================================================================
+
+# ---- Attribution + evaluation (pinned per user spec) ----
+captum==0.8.0
+quantus==0.5.3
+
+# ---- Segment Anything (ViT-H + automatic mask generator) ----
+git+https://github.com/facebookresearch/segment-anything.git
+
+# ---- Image I/O (pinned per user spec) ----
+opencv-python==4.11.0.86
+Pillow>=10.0.0
+
+# ---- Numerical core ----
+# numpy <2.0 keeps compatibility with scipy 1.x and quantus 0.5.3
+numpy>=1.24,<2.0
+scipy>=1.10
+
+# ---- Plotting / progress ----
+matplotlib>=3.7
+tqdm>=4.65
