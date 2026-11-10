@@ -63,7 +63,7 @@ to have no metric impact (see `cache/itf_ablations/`).
 
 ### Sparse_ITF (set-uniform)
 
-`--set_uniform` on `run_itf.py` produces the sparse variant used in the results table. It shares the identical per-set score φ(S) and identical top-B SAM proposals as two-level ITF; only the per-pixel map differs.
+`--set_uniform` on `run_sparse_itf.py` produces the sparse variant used in the results table. It shares the identical per-set score φ(S) and identical top-B SAM proposals as two-level ITF; only the per-pixel map differs.
 
 | | Two-level ITF | Sparse_ITF |
 |---|---|---|
@@ -473,7 +473,7 @@ for spec in "0:vgg16" "1:resnet101" "2:densenet121" "3:mobilenet_v3_large"; do
       out="cache/itf_${ds}_${m}_seed${seed}_setuniform.json"
       [ -f "$out" ] && { echo "[GPU$gpu] SKIP $ds/$m/seed$seed"; continue; }
       echo "[GPU$gpu] START $ds/$m/seed$seed"
-      CUDA_VISIBLE_DEVICES=$gpu python run_itf.py \
+      CUDA_VISIBLE_DEVICES=$gpu python run_sparse_itf.py \
         --dataset "$ds" --model "$m" --num_samples 1000 \
         --set_uniform --top_B 5 \
         --seed "$seed" --tag "seed${seed}_setuniform" \
@@ -561,7 +561,7 @@ CUDA_VISIBLE_DEVICES=0 python run_itf.py \
 For ablations on **Sparse_ITF**, the only parameters that matter are `--top_B` and `--signed` (`--coarse_size`, `--block_size`, and `--hierarchy` are ignored under `--set_uniform`). Example:
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 python run_itf.py \
+CUDA_VISIBLE_DEVICES=0 python run_sparse_itf.py \
     --dataset cub --model vgg16 --num_samples 200 \
     --set_uniform --top_B 3 \
     --seed 42 --tag ablation_setuniform_tb3
