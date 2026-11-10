@@ -65,6 +65,7 @@ to have no metric impact (see `cache/itf_ablations/`).
 
 `--set_uniform` on `run_sparse_itf.py` produces the sparse variant used in the results table. > **Note.** `run_sparse_itf.py` mirrors `run_itf.py`'s CLI and adds a `--set_uniform` flag. The flag's default is `False`, so **`--set_uniform` must be passed explicitly** — omitting it silently runs two-level (dense) ITF and saves a JSON whose tag says `setuniform`. All commands below include it. It shares the identical per-set score φ(S) and identical top-B SAM proposals as two-level ITF; only the per-pixel map differs.
 
+
 | | Two-level ITF | Sparse_ITF |
 |---|---|---|
 | Sets scored | coarse grid + top-B SAM proposals | top-B SAM proposals only |
@@ -72,7 +73,7 @@ to have no metric impact (see `cache/itf_ablations/`).
 | Refine blocks | 8×8 inside top-B union | none |
 | Per-pixel assignment | block-constant per coarse/refine block | mask-constant per selected SAM mask |
 | Nonzero support | every pixel | union of top-B masks only |
-| Selection (`top_idx`) | `argsort(|φ(S)|)[:B]` | **identical** |
+| Selection (top_idx) | `argsort(abs(φ(S)))[:B]` | **identical** |
 | Set function φ | zero-fill ITF | **identical** |
 
 **Why two variants.** Two-level ITF is the recommended default: the dense map is the honest object for ROAD_AOPC, which removes and imputes pixels across the whole image. Sparse_ITF is the matched comparator for set-based baselines (H-Sets, Archipelago, MoXI): same set budget, same SAM proposals, comparable sparsity — so sparsity and per-pixel faithfulness are not confounded by map density.
@@ -232,8 +233,8 @@ not attribution noise — this is a strict improvement over stochastic methods.
 │   ├── check_accuracy.py              # load_*_model, val_transform(dataset=...)
 │   ├── hsets_metrics.py               # gini, road_aopc, faithfulness_corr, to_2d
 │   └── sample_correct.py              # --num_iterations, --seed
-├── run_itf.py                         # single-config runner
-├── run_sparse_itf.py                  # single-config runner (--set_uniform enables Sparse_ITF)
+├── run_itf.py                         # two-level ITF (dense map); no --set_uniform flag
+├── run_sparse_itf.py                  # ITF + Sparse_ITF; requires --set_uniform to enable sparse map
 ├── run_itf_5runs.sh                   # 4-GPU driver: 5 seeds × 8 configs
 ├── aggregate_itf_5runs.py             # reads JSON results, prints table
 ├── requirements.txt
@@ -420,6 +421,13 @@ CUDA_VISIBLE_DEVICES=0 python run_sparse_itf.py \
     --set_uniform --top_B 5 \
     --seed 42 --tag smoke_test_setuniform
 ```
+
+**Two differences from the dense run:**
+
+1. `run_sparse_itf.py` (not `run_itf.py`) — the two-level script does not accept `--set_uniform`.
+2. `--set_uniform` is mandatory; `run_sparse_itf.py`'s default is `False`, so omitting it silently produces a dense map.
+
+Output schema is identical to the two-level run. Expect a **higher Gini** (fewer nonzero pixels) and a **lower ROAD** (sparse maps cannot rank pixels outside the top-5 masks).
 
 Output schema is identical to the two-level run. Expect a **higher Gini** (fewer nonzero pixels) and a **slightly lower ROAD** (sparse maps cannot rank pixels outside the masks) — this is the structural cost, see *Method → Sparse_ITF*.
 
