@@ -1,7 +1,6 @@
-# ITF
-Information Theoretic Attribution
-
 # ITF: Conditional-Information Attribution for Image Classifiers
+
+**Information Theoretic Attribution** — reference implementation.
 
 Reference implementation of **ITF**, a set-level feature attribution method based on
 **pointwise conditional mutual information** between a pixel set and the model's
