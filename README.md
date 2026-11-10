@@ -63,7 +63,7 @@ to have no metric impact (see `cache/itf_ablations/`).
 
 ### Sparse_ITF (set-uniform)
 
-`--set_uniform` on `run_sparse_itf.py` produces the sparse variant used in the results table. It shares the identical per-set score φ(S) and identical top-B SAM proposals as two-level ITF; only the per-pixel map differs.
+`--set_uniform` on `run_sparse_itf.py` produces the sparse variant used in the results table. > **Note.** `run_sparse_itf.py` mirrors `run_itf.py`'s CLI and adds a `--set_uniform` flag. The flag's default is `False`, so **`--set_uniform` must be passed explicitly** — omitting it silently runs two-level (dense) ITF and saves a JSON whose tag says `setuniform`. All commands below include it. It shares the identical per-set score φ(S) and identical top-B SAM proposals as two-level ITF; only the per-pixel map differs.
 
 | | Two-level ITF | Sparse_ITF |
 |---|---|---|
