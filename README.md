@@ -558,13 +558,18 @@ CUDA_VISIBLE_DEVICES=0 python run_itf.py \
 ```
 
 ---
-For ablations on **Sparse_ITF**, the only parameters that matter are `--top_B` and `--signed` (`--coarse_size`, `--block_size`, and `--hierarchy` are ignored under `--set_uniform`). Example:
+For ablations on Sparse_ITF, only `--top_B` and `--signed` affect the output — `--coarse_size`, `--block_size`, and `--hierarchy` are silently ignored under `--set_uniform` (the code returns before the coarse and refine paths). Example:
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 python run_sparse_itf.py \
     --dataset cub --model vgg16 --num_samples 200 \
     --set_uniform --top_B 3 \
     --seed 42 --tag ablation_setuniform_tb3
+```
+
+`--set_uniform` must be passed explicitly; `run_sparse_itf.py`'s default is `False`.
+
+The `top_B` sweep on Sparse_ITF is what backs the "matched sparsity" claim in the Results table: at `B=1–3`, Sparse_ITF's ImageNet Gini rises to H-Sets' level (0.95–0.97) while its ROAD stays above H-Sets' 0.26–0.38.
 ```
 
 The `top_B` sweep on Sparse_ITF is what backs the "matched sparsity" claim in the Results table: at `B=1–3`, Sparse_ITF's ImageNet Gini rises to H-Sets' level (0.95–0.97) while its ROAD stays above H-Sets' 0.26–0.38.
