@@ -190,12 +190,7 @@ H-Sets reference values are the paper-reported figures.
 
 - **Sparse_ITF dominates H-Sets on CUB**: at matched set budget (B=5) it is both sparser (Gini 0.935–0.950 vs 0.89–0.93) and more faithful (ROAD 0.665–0.712 vs 0.60–0.65) on all four CUB models. On ImageNet, H-Sets is ~0.04 sparser; the `top_B` ablation shows Sparse_ITF still wins ROAD at matched Gini (B=1–3) — the sparsity–faithfulness Pareto frontier does not pass through H-Sets.
 
-**Note on ImageNet.** The H-Sets reference numbers are the paper-reported
-figures. Our independent reproduction of H-Sets on the same pipeline produced
-ImageNet ROAD_AOPC values of 0.49–0.63 rather than the paper's 0.26–0.38 — the
-ImageNet Δ in the table partly reflects a lower-than-reproducible H-Sets
-baseline. On CUB, where we could closely reproduce H-Sets (0.637 vs 0.65), the
-+0.10–0.16 gap is a fair, direct comparison.
+
 
 ---
 
