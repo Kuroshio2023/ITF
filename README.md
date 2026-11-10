@@ -158,6 +158,16 @@ H-Sets reference values are the paper-reported figures.
 | ImageNet | DenseNet121 | 0.021 ± 0.006 |0.0227| 0.034 |
 | ImageNet | MobileNetV3 | 0.017 ± 0.004 |0.0158| 0.021 |
 
+Dataset	Model	ITF	Sparse_ITF	H-Sets (paper)
+CUB	VGG16	0.748 ± 0.002	0.712 ± 0.003	0.65 ± 0.00
+CUB	ResNet101	0.766 ± 0.001	0.671 ± 0.005	0.63 ± 0.01
+CUB	DenseNet121	0.766 ± 0.003	0.679 ± 0.003	0.65 ± 0.00
+CUB	MobileNetV3	0.758 ± 0.002	0.665 ± 0.007	0.60 ± 0.00
+ImageNet	VGG16	0.656 ± 0.004	0.567 ± 0.007	0.34 ± 0.01
+ImageNet	ResNet101	0.611 ± 0.009	0.520 ± 0.008	0.26 ± 0.02
+ImageNet	DenseNet121	0.623 ± 0.004	0.526 ± 0.006	0.38 ± 0.01
+ImageNet	MobileNetV3	0.578 ± 0.008	0.512 ± 0.009	0.37 ± 0.01
+
 **Interpretation.**
 
 - **ITF wins ROAD_AOPC on all 8 configs.** This is expected: ITF's functional
