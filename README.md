@@ -6,7 +6,8 @@ Reference implementation of **ITF**, a set-level feature attribution method base
 **pointwise conditional mutual information** between a pixel set and the model's
 predicted class. Unlike gradient-path methods, ITF measures the change in
 `p(y|x)` when a set of pixels is replaced with a counterfactual sample — making
-it directly aligned with removal-based faithfulness metrics.
+it directly aligned with removal-based faithfulness metrics. The repo also includes **Sparse_ITF**,
+the set-uniform variant of ITF.
 
 Evaluated on **ImageNet** and **Caltech-UCSD Birds (CUB)** across
 VGG16, ResNet101, DenseNet121, and MobileNetV3, against the H-Sets paper's
@@ -59,6 +60,24 @@ counterfactual used by Set-Faithfulness Correlation.
 global structure; the top-B=5 SAM proposals are refined at 8×8 blocks inside
 the mask. This trades ~8× compute for image-boundary fidelity and was validated
 to have no metric impact (see `cache/itf_ablations/`).
+
+### Sparse_ITF (set-uniform)
+
+`--set_uniform` on `run_itf.py` produces the sparse variant used in the results table. It shares the identical per-set score φ(S) and identical top-B SAM proposals as two-level ITF; only the per-pixel map differs.
+
+| | Two-level ITF | Sparse_ITF |
+|---|---|---|
+| Sets scored | coarse grid + top-B SAM proposals | top-B SAM proposals only |
+| Coarse grid | 64×64 (IN) / 32×32 (CUB) | **none** — early return before coarse path |
+| Refine blocks | 8×8 inside top-B union | none |
+| Per-pixel assignment | block-constant per coarse/refine block | mask-constant per selected SAM mask |
+| Nonzero support | every pixel | union of top-B masks only |
+| Selection (`top_idx`) | `argsort(|φ(S)|)[:B]` | **identical** |
+| Set function φ | zero-fill ITF | **identical** |
+
+**Why two variants.** Two-level ITF is the recommended default: the dense map is the honest object for ROAD_AOPC, which removes and imputes pixels across the whole image. Sparse_ITF is the matched comparator for set-based baselines (H-Sets, Archipelago, MoXI): same set budget, same SAM proposals, comparable sparsity — so sparsity and per-pixel faithfulness are not confounded by map density.
+
+The two variants share φ and the top-B selection, so **Harsanyi decomposition, top-B selection Jaccard, and Set-ROAD / Set-AOPC are identical for ITF and Sparse_ITF**. The choice affects the per-pixel map, not the set-level attribution.
 
 **Harsanyi residual.** The per-pixel map `M` is not forced to be set-consistent
 with `φ(S)`; the residual `φ(S) − Σ_{j∈S} M_j` is the Harsanyi interaction
@@ -169,6 +188,8 @@ H-Sets reference values are the paper-reported figures.
 - **ITF loses FC on most configs.** FC measures per-pixel logit correlation;
   ITF produces block-constant maps that don't track per-pixel gradients well.
 
+- **Sparse_ITF dominates H-Sets on CUB**: at matched set budget (B=5) it is both sparser (Gini 0.935–0.950 vs 0.89–0.93) and more faithful (ROAD 0.665–0.712 vs 0.60–0.65) on all four CUB models. On ImageNet, H-Sets is ~0.04 sparser; the `top_B` ablation shows Sparse_ITF still wins ROAD at matched Gini (B=1–3) — the sparsity–faithfulness Pareto frontier does not pass through H-Sets.
+
 **Note on ImageNet.** The H-Sets reference numbers are the paper-reported
 figures. Our independent reproduction of H-Sets on the same pipeline produced
 ImageNet ROAD_AOPC values of 0.49–0.63 rather than the paper's 0.26–0.38 — the
@@ -193,6 +214,9 @@ Locked after extensive ablation (see `cache/itf_ablations/`).
 | `K_sets`, `K_blocks` | **1** | (not meaningful; zero fill is deterministic) | — | MC budget for stochastic fills only |
 | `num_samples` | **1000** per seed | — | — | Matches H-Sets protocol |
 | `sample_seed` | **42, 43, 44, 45, 46** | — | 5 independent runs | Std across seeds only (zero-fill is deterministic) |
+| `set_uniform` | False | True, False | Enables Sparse_ITF construction (no coarse path; mask-constant on top-B) | Apples-to-apples with H-Sets |
+
+When `--set_uniform` is passed, `coarse_size`, `block_size`, and `hierarchy` are silently ignored — the pipeline returns before those code paths. This is correct behavior; see *Method → Sparse_ITF*.
 
 **Consequence of the locks:** the pipeline is fully deterministic given a pool.
 All reported std values **reflect only variation between the 5 sample pools**,
@@ -214,6 +238,7 @@ not attribution noise — this is a strict improvement over stochastic methods.
 │   ├── hsets_metrics.py               # gini, road_aopc, faithfulness_corr, to_2d
 │   └── sample_correct.py              # --num_iterations, --seed
 ├── run_itf.py                         # single-config runner
+├── run_sparse_itf.py                  # single-config runner (--set_uniform enables Sparse_ITF)
 ├── run_itf_5runs.sh                   # 4-GPU driver: 5 seeds × 8 configs
 ├── aggregate_itf_5runs.py             # reads JSON results, prints table
 ├── requirements.txt
@@ -392,6 +417,17 @@ CUDA_VISIBLE_DEVICES=0 python run_itf.py \
     --seed 42 --tag smoke_test
 ```
 
+For the sparse variant, the only change is `--set_uniform`:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python run_sparse_itf.py \
+    --dataset cub --model vgg16 --num_samples 20 \
+    --set_uniform --top_B 5 \
+    --seed 42 --tag smoke_test_setuniform
+```
+
+Output schema is identical to the two-level run. Expect a **higher Gini** (fewer nonzero pixels) and a **slightly lower ROAD** (sparse maps cannot rank pixels outside the masks) — this is the structural cost, see *Method → Sparse_ITF*.
+
 Expected output:
 ```
   [  5/ 20] gini=0.9xxx road=0.xxxx corr=0.xxxx  (X.Xs/img, ETA X.Xmin)
@@ -430,6 +466,44 @@ pkill -f "run_itf.py" 2>/dev/null; sleep 2
 nohup bash -c "IMG_CS=64 CUB_CS=32 ./run_itf_5runs.sh" \
     > logs/itf_5runs_master.log 2>&1 &
 echo $! > logs/itf_5runs.pid
+```
+
+For the **Sparse_ITF** 5-run sweep (~8 h on 4 GPUs; Sparse_ITF is ~10× cheaper per image, so the total is dominated by the 4-model parallel schedule rather than by Sparse_ITF's own cost):
+
+```bash
+mkdir -p logs
+for spec in "0:vgg16" "1:resnet101" "2:densenet121" "3:mobilenet_v3_large"; do
+  gpu="${spec%%:*}"; m="${spec##*:}"
+  ( for ds in imagenet cub; do for seed in 42 43 44 45 46; do
+      out="cache/itf_${ds}_${m}_seed${seed}_setuniform.json"
+      [ -f "$out" ] && { echo "[GPU$gpu] SKIP $ds/$m/seed$seed"; continue; }
+      echo "[GPU$gpu] START $ds/$m/seed$seed"
+      CUDA_VISIBLE_DEVICES=$gpu python run_itf.py \
+        --dataset "$ds" --model "$m" --num_samples 1000 \
+        --set_uniform --top_B 5 \
+        --seed "$seed" --tag "seed${seed}_setuniform" \
+        > "logs/itf_${ds}_${m}_seed${seed}_setuniform.log" 2>&1
+      echo "[GPU$gpu] END $ds/$m/seed$seed exit=$?"
+  done; done ) > "logs/setuniform_gpu${gpu}.log" 2>&1 &
+done
+wait
+echo "=== ALL 40 CONFIGS COMPLETE $(date) ==="
+```
+
+Aggregate the 5 seed-level means per (dataset, model) — **do not** report the per-sample std inside a single JSON; the std you report in the table must be across the 5 pool means:
+
+```bash
+python - <<'PY'
+import glob, json, statistics as st
+from collections import defaultdict
+rows = defaultdict(dict)
+for f in glob.glob("cache/itf_*_seed*_setuniform.json"):
+    d = json.load(open(f)); rows[(d["dataset"], d["model"])][d["seed"]] = d
+for (ds, m), by_seed in sorted(rows.items()):
+    for k in ("gini", "road", "corr"):
+        vals = [by_seed[s][k]["mean"] for s in sorted(by_seed)]
+        print(f"{ds:8s} {m:20s} {k:5s}  mean={st.mean(vals):+.4f}  std(5 pools)={st.stdev(vals):.4f}")
+PY
 ```
 
 **With shipped caches: ~10–12 h.**
@@ -489,6 +563,17 @@ CUDA_VISIBLE_DEVICES=0 python run_itf.py \
 ```
 
 ---
+For ablations on **Sparse_ITF**, the only parameters that matter are `--top_B` and `--signed` (`--coarse_size`, `--block_size`, and `--hierarchy` are ignored under `--set_uniform`). Example:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python run_itf.py \
+    --dataset cub --model vgg16 --num_samples 200 \
+    --set_uniform --top_B 3 \
+    --seed 42 --tag ablation_setuniform_tb3
+```
+
+The `top_B` sweep on Sparse_ITF is what backs the "matched sparsity" claim in the Results table: at `B=1–3`, Sparse_ITF's ImageNet Gini rises to H-Sets' level (0.95–0.97) while its ROAD stays above H-Sets' 0.26–0.38.
+
 
 ## Troubleshooting
 
@@ -520,6 +605,9 @@ Wrong normalization. Ensure `configs/default.py` has `normalize_mean["imagenet"]
 
 **Does not apply to ITF** — ITF is forward-only. Only H-Sets suffers the `retain_graph` / Hessian BFS bug on skip-connection architectures.
 
+**Sparse_ITF returns an all-zero map.**
+
+Occurs when every SAM proposal scores φ(S) ≤ 0 on the predicted class — common on very confident models with small proposals. The driver counts these as skips; if the skip rate exceeds ~5% on a config, either raise `top_B` or lower `pred_iou_thresh` in `get_sam_proposals`. Do **not** switch to `--signed` — it changes the ranking key and breaks comparability with the unsigned H-Sets baseline.
 ---
 
 ## Citation
